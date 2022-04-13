@@ -1,0 +1,87 @@
+{
+  "label": "Scripts",
+  "documentation": "https://developer.wordpress.org/reference/functions/wp_register_script/",
+  "supportsTemplates": true,
+  "schema": {
+    "key": {
+      "label": "Key",
+      "description": "(string) (Required) Name of the script. Should be unique.",
+      "type": "text",
+      "required": true,
+      "placeholder": "my-custom-script",
+      "default": ""
+    },
+    "source": {
+      "label": "Source",
+      "description": "(string) (Optional) Full URL of the script, or path of the script relative to the WordPress root directory.",
+      "type": "text",
+      "required": true,
+      "placeholder": "https://example.com/some-script.js",
+      "default": ""
+    },
+    "dependencies": {
+      "label": "Depends On",
+      "description": "(string[]) (Optional) An array of registered script handles this script depends on.\n\t\t\tDefault value: array()",
+      "type": "string[]",
+      "default": []
+    },
+    "version": {
+      "label": "Version",
+      "description": "(string|bool|null) (Optional) String specifying script version number, if it has one, which is added to the URL as a query string for cache busting purposes. If version is set to false, a version number is automatically added equal to current installed WordPress version. If set to null, no version is added.",
+      "type": "text",
+      "placeholder": "1.0.0",
+      "default": ""
+    },
+    "location": {
+      "label": "Location",
+      "description": "(string[]) (Optional) An array of areas to inject this script. Available values are 'front', 'back' or 'both'.\n\t\t\tDefault value: array('front')",
+      "type": "string[]",
+      "default": [
+        "front"
+      ],
+      "autocomplete": [
+        "front",
+        "back",
+        "both"
+      ]
+    },
+    "footer": {
+      "label": "In Footer",
+      "description": "(boolean) (Optional) determine whether to inject this script into the header or footer area.\n\t\t\tDefault value: array('front')",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "table": {
+    "columns": [
+      {
+        "label": "Key",
+        "key": "key",
+        "type": "key"
+      },
+      {
+        "label": "Source",
+        "key": "source"
+      },
+      {
+        "label": "Dependencies",
+        "key": "dependencies",
+        "type": "dependency[]"
+      },
+      {
+        "label": "Version",
+        "key": "version"
+      },
+      {
+        "label": "Location",
+        "key": "location",
+        "type": "string[]"
+      },
+      {
+        "label": "Footer",
+        "key": "footer",
+        "type": "boolean"
+      }
+    ]
+  }
+}

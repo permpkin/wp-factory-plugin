@@ -1,0 +1,22 @@
+{
+  "label": "Sites",
+  "documentation": "#",
+  "isSingular": true,
+  "schema": {
+    "name": {
+      "label": "Name",
+      "description": "(string) (Required) Name of the site. Should be unique.",
+      "type": "text",
+      "required": true,
+      "placeholder": "My Website",
+      "default": ""
+    },
+    "url": {
+      "label": "Url(s)",
+      "description": "(string[]) (Optional) Full URL of the site, optionaly add multiple if required.",
+      "type": "string[]",
+      "placeholder": "https://example.com",
+      "default": ""
+    }
+  }
+}

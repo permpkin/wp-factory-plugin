@@ -1,0 +1,171 @@
+{
+  "label": "Blocks",
+  "documentation": "https://www.advancedcustomfields.com/resources/acf_register_block_type/",
+  "supportsTemplates": true,
+  "schema": {
+    "key": {
+      "label": "Key",
+      "description": "(String) A unique identifier for internal purposes.",
+      "type": "text",
+      "required": true,
+      "placeholder": "my-custom-block"
+    },
+    "name": {
+      "label": "Name",
+      "description": "(String) A unique name that identifies the block (without namespace). For example ‘testimonial’. Note: A block name can only contain lowercase alphanumeric characters and dashes, and must begin with a letter.",
+      "type": "text",
+      "required": true,
+      "placeholder": "My Custom Block"
+    },
+    "title": {
+      "label": "Title",
+      "description": "(String) The display title for your block. For example ‘Testimonial’.",
+      "type": "text",
+      "required": true,
+      "placeholder": "Custom Block"
+    },
+    "description": {
+      "label": "Block Description",
+      "description": "(String) (Optional) This is a short description for your block.",
+      "type": "textarea",
+      "placeholder": "My descriptive summary...",
+      "default": ""
+    },
+    "category": {
+      "label": "Category",
+      "description": "(String) Blocks are grouped into categories to help users browse and discover them. The core provided categories are [ common | formatting | layout | widgets | embed ]. Plugins and Themes can also register custom block categories.",
+      "type": "string[]",
+      "required": true
+    },
+    "icon": {
+      "label": "Icon",
+      "description": "(String|Array) (Optional) An icon property can be specified to make it easier to identify a block. These can be any of WordPress’ Dashicons, or a custom svg element.",
+      "type": "text",
+      "required": true,
+      "placeholder": "dashicon-*"
+    },
+    "keywords": {
+      "label": "Keywords",
+      "description": "(Array) (Optional) An array of search terms to help user discover the block while searching.",
+      "type": "string[]"
+    },
+    "post_types": {
+      "label": "Post Types",
+      "description": "(Array) (Optional) An array of post types to restrict this block type to.",
+      "type": "string[]"
+    },
+    "mode": {
+      "label": "Mode",
+      "description": "(String) (Optional) The display mode for your block. Available settings are “auto”, “preview” and “edit”. Defaults to “preview”. auto: Preview is shown by default but changes to edit form when block is selected. preview: Preview is always shown. Edit form appears in sidebar when block is selected. edit: Edit form is always shown.\n\n\t\t\tNote. When in “preview” or “edit” modes, an icon will appear in the block toolbar to toggle between modes.",
+      "type": "select",
+      "options": [
+        "auto",
+        "preview",
+        "edit"
+      ],
+      "multi": false,
+      "default": "preview"
+    },
+    "align": {
+      "label": "Align",
+      "description": "(String) (Optional) The default block alignment. Available settings are “left”, “center”, “right”, “wide” and “full”. Defaults to \"full\".",
+      "type": "select",
+      "options": [
+        "left",
+        "center",
+        "right",
+        "wide",
+        "full"
+      ],
+      "multi": false,
+      "default": "full"
+    },
+    "supports": {
+      "label": "Supports",
+      "description": "(Array) (Optional) An array of features to support. All properties from the JavaScript block supports documentation may be used. The following options are supported:",
+      "type": "string[]"
+    },
+    "@fields": {
+      "label": "Fields",
+      "description": "(array) An array of fields",
+      "type": "repeater",
+      "repeater": "fields",
+      "force": {
+        "object_type": [
+          "!this"
+        ]
+      },
+      "columns": [
+        {
+          "label": "Key",
+          "key": "key",
+          "type": "key"
+        },
+        {
+          "label": "Description",
+          "key": "description"
+        }
+      ],
+      "required": true
+    },
+    "@styles": {
+      "label": "Styles",
+      "description": "(array) An array of styles",
+      "type": "repeater",
+      "repeater": "styles",
+      "columns": [
+        {
+          "label": "Key",
+          "key": "key",
+          "type": "key"
+        },
+        {
+          "label": "Source",
+          "key": "source"
+        }
+      ],
+      "required": true
+    },
+    "@scripts": {
+      "label": "Scripts",
+      "description": "(array) An array of scripts",
+      "type": "repeater",
+      "repeater": "scripts",
+      "columns": [
+        {
+          "label": "Key",
+          "key": "key",
+          "type": "key"
+        },
+        {
+          "label": "Source",
+          "key": "source"
+        }
+      ],
+      "required": true
+    }
+  },
+  "table": {
+    "columns": [
+      {
+        "label": "Key",
+        "key": "key",
+        "type": "key"
+      },
+      {
+        "label": "Description",
+        "key": "description"
+      },
+      {
+        "label": "Category",
+        "key": "category",
+        "type": "string[]"
+      },
+      {
+        "label": "Keywords",
+        "key": "keywords",
+        "type": "string[]"
+      }
+    ]
+  }
+}

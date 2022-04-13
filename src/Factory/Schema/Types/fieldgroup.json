@@ -1,0 +1,49 @@
+{
+  "label": "Custom Field",
+  "documentation": "https://developer.wordpress.org/reference/functions/register_post_type/",
+  "supportsTemplates": true,
+  "schema": {
+    "key": {
+      "label": "Key",
+      "description": "(string) Unique identifier for field group.",
+      "type": "text",
+      "prefix": "group_",
+      "required": true,
+      "placeholder": "my-field-group"
+    },
+    "label": {
+      "label": "Label",
+      "description": "(string) Visible in metabox handle",
+      "type": "text",
+      "required": true,
+      "placeholder": "My Field Group"
+    },
+    "type": {
+      "label": "Type",
+      "description": "(string) Type of field",
+      "type": "select",
+      "options": [
+        "text",
+        "image",
+        "checkbox"
+      ]
+    }
+  },
+  "table": {
+    "columns": [
+      {
+        "label": "Key",
+        "key": "key",
+        "type": "key"
+      },
+      {
+        "label": "Label",
+        "key": "label"
+      },
+      {
+        "label": "Type",
+        "key": "type"
+      }
+    ]
+  }
+}

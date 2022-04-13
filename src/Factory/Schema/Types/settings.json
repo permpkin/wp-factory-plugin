@@ -1,0 +1,60 @@
+{
+  "label": "Settings",
+  "documentation": "#",
+  "isSingular": true,
+  "supportsTemplates": true,
+  "schema": {
+    "theme_support": {
+      "label": "Theme Support",
+      "description": "Register theme support for various features.",
+      "type": "string[]",
+      "required": false,
+      "autocomplete": [
+        "align-wide",
+        "editor-styles",
+        "post-formats",
+        "post-thumbnails",
+        "html5",
+        "title-tag",
+        "custom-background"
+      ]
+    },
+    "allowed_origins": {
+      "label": "Allowed Origins",
+      "description": "Define site origins allowed to access this site.",
+      "type": "string[]",
+      "placeholder": "example.com, localhost, 127.0.0.1",
+      "required": false
+    },
+    "disabled_admin_pages": {
+      "label": "Disabled Admin Pages",
+      "description": "Define admin pages to disable for users.",
+      "type": "string[]",
+      "required": false
+    },
+    "disabled_user_roles": {
+      "label": "Disabled User Roles",
+      "description": "Define user_roles to disable for users.",
+      "type": "string[]",
+      "required": false
+    },
+    "image_sizes": {
+      "label": "Image Sizes",
+      "description": "Enabled default Image sizes.",
+      "type": "string[]",
+      "required": false
+    },
+    "hide_block_categories": {
+      "label": "Hide Block Categories",
+      "description": "List Block categories to hide from the admin interface.",
+      "type": "string[]",
+      "required": false
+    },
+    "enable_debugger": {
+      "label": "Enable Debugger",
+      "description": "Enable PHP Debugger in DEV mode.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

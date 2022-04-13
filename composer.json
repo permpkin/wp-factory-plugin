@@ -1,0 +1,20 @@
+{
+    "name": "permpkin/wp-factory-plugin",
+    "description": "WP Factory Interface Plugin",
+    "type": "library",
+    "require": {
+        "pecee/simple-router": "4.3.7.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Peter Kavanagh",
+            "email": "peter@tensorgroup.org"
+        }
+    ],
+  "autoload": {
+    "psr-4": {
+      "Factory\\": "src/Factory/"
+    }
+  }
+}
