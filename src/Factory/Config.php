@@ -2,8 +2,9 @@
 
 namespace Factory;
 
-use \Factory\Utils;
-use \Factory\Schema\ConfigConstructor;
+use Factory\Utils;
+use Factory\Schema\ConfigConstructor;
+use JsonSchema\Validator;
 
 class Config {
 
@@ -25,9 +26,11 @@ class Config {
 
   }
 
-  static function replace($data) {
+  static function replace() {
     
-    file_put_contents($_SERVER['APP_PATH'].'/@config.json', $data);
+    $value = json_encode(input('config'), JSON_PRETTY_PRINT);
+    
+    file_put_contents($_SERVER['APP_PATH'].'/@config.json', $value);
     
     return json_encode([
       "success"=>true
@@ -55,6 +58,25 @@ class Config {
 
     if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
     {
+
+      $validator = new Validator;
+
+      $data = json_decode(file_get_contents($_SERVER['APP_PATH'].'/@config.json'));
+
+      $validator->validate($data, (object)['$ref' => 'file://'.__DIR__.'/Schema.json']);
+
+      // check @json file is valid first.
+      if (!$validator->isValid()) {
+        return json_encode([
+          "valid" => false,
+          "errors" => array_map(function($row) {
+            return [
+              'error' => $row['message'],
+              'pointer' => $row['pointer']
+            ];
+          }, $validator->getErrors())
+        ]);
+      }
 
       $config = new ConfigConstructor(Utils::GetConfigJSON($_SERVER['APP_PATH'].'/@config.json'));
 

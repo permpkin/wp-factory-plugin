@@ -1,0 +1,220 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+  "properties": {
+    "styles": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "scripts": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "blocks": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "pages": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "taxonomies": {
+      "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "object_type": {
+              "type": "string"
+            },
+            "labels": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "singular_name": {
+                  "type": "string"
+                },
+                "menu_name": {
+                  "type": "string"
+                },
+                "all_items": {
+                  "type": "string"
+                },
+                "parent_item": {
+                  "type": "string"
+                },
+                "parent_item_colon": {
+                  "type": "string"
+                },
+                "new_item_name": {
+                  "type": "string"
+                },
+                "add_new_item": {
+                  "type": "string"
+                },
+                "edit_item": {
+                  "type": "string"
+                },
+                "update_item": {
+                  "type": "string"
+                },
+                "view_item": {
+                  "type": "string"
+                },
+                "separate_items_with_commas": {
+                  "type": "string"
+                },
+                "add_or_remove_items": {
+                  "type": "string"
+                },
+                "choose_from_most_used": {
+                  "type": "string"
+                },
+                "popular_items": {
+                  "type": "string"
+                },
+                "search_items": {
+                  "type": "string"
+                },
+                "not_found": {
+                  "type": "string"
+                },
+                "no_terms": {
+                  "type": "string"
+                },
+                "items_list": {
+                  "type": "string"
+                },
+                "items_list_navigation": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": {
+              "type": "string"
+            },
+            "public": {
+              "type": "string"
+            },
+            "publicly_queryable": {
+              "type": "string"
+            },
+            "hierarchical": {
+              "type": "string"
+            },
+            "show_ui": {
+              "type": "string"
+            },
+            "show_in_menu": {
+              "type": "string"
+            },
+            "show_in_nav_menus": {
+              "type": "string"
+            },
+            "show_in_rest": {
+              "type": "string"
+            },
+            "rest_base": {
+              "type": "string"
+            },
+            "rest_controller_class": {
+              "type": "string"
+            },
+            "show_tagcloud": {
+              "type": "string"
+            },
+            "show_in_quick_edit": {
+              "type": "string"
+            },
+            "show_admin_column": {
+              "type": "string"
+            },
+            "meta_box_cb": {
+              "type": "string"
+            },
+            "meta_box_sanitize_cb": {
+              "type": "string"
+            },
+            "capabilities": {
+              "type": "object",
+              "properties": {
+                "manage_terms": {
+                  "type": "string"
+                },
+                "edit_terms": {
+                  "type": "string"
+                },
+                "delete_terms": {
+                  "type": "string"
+                },
+                "assign_terms": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+    },
+    "types": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "fields": {
+      "type": "array",
+        "items": {
+          "type": "object"
+        }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "theme_support": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowed_origins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disabled_admin_pages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disabled_user_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hide_block_categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enable_debugger": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

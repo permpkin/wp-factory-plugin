@@ -3,8 +3,33 @@
 require_once 'vendor/autoload.php';
 
 use Pecee\SimpleRouter\SimpleRouter;
+use Pecee\Http\Request;
 use Pecee\Http\Response;
 use Factory\Config;
+
+/**
+ * @return \Pecee\Http\Request
+ */
+function request(): Request
+{
+    return SimpleRouter::request();
+}
+
+/**
+ * Get input class
+ * @param string|null $index Parameter index name
+ * @param string|mixed|null $defaultValue Default return value
+ * @param array ...$methods Default methods
+ * @return \Pecee\Http\Input\InputHandler|array|string|null
+ */
+function input($index = null, $defaultValue = null, ...$methods)
+{
+    if ($index !== null) {
+        return request()->getInputHandler()->value($index, $defaultValue, ...$methods);
+    }
+
+    return request()->getInputHandler();
+}
 
 SimpleRouter::group(['prefix' => '/wp/factory/api/config'], function () {
   
