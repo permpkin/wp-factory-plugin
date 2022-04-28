@@ -52,10 +52,10 @@ SimpleRouter::group(['prefix' => '/wp/factory/api/config'], function () {
   SimpleRouter::get('/validate', [Config::class, 'validate']);
 
   // compile config to php.
-  SimpleRouter::get('/deploy', [Config::class, 'deploy']);
+  SimpleRouter::post('/deploy', [Config::class, 'deploy']);
 
   // check missing fields not present in config or non-deployed blocks.
-  SimpleRouter::get('/verify', [Config::class, 'verify']);
+  SimpleRouter::post('/verify', [Config::class, 'verify']);
 
 });
 
