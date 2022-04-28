@@ -70,9 +70,14 @@ class Config {
         return json_encode([
           "valid" => false,
           "errors" => array_map(function($row) {
+            $split_pointer = explode('/', $row['pointer']);
+            $pointer = array_pop($split_pointer);
             return [
-              'error' => $row['message'],
-              'pointer' => $row['pointer']
+              'title' => 'validation_error',
+              'message' => $row['message'],
+              'url' => '/wp/factory/config'.preg_replace('/(\/(?!.*\/))/', '#', $row['pointer']),
+              'path' => join('.',array_filter($split_pointer, fn($value) => $value !== '' || $value === $pointer)),
+              'field' => $pointer
             ];
           }, $validator->getErrors())
         ]);
