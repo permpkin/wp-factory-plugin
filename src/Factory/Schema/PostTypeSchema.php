@@ -27,10 +27,17 @@ class PostTypeSchema extends BaseSchema {
 
   static function compile($parent, $args)
   {
-    foreach($args as $key=>$type)
+    foreach($args as $index=>$type)
     {
       // merge defaults.
       $typeSchema = array_merge(PostTypeSchema::$defaults, $type);
+
+      // register post type styles.
+      if (isset($typeSchema['@taxonomies']))
+      {
+        $parent->addTaxonomies($typeSchema['@taxonomies']);
+        unset($typeSchema['@taxonomies']);
+      }
 
       // register post type styles.
       if (isset($typeSchema['@styles']))
@@ -54,7 +61,7 @@ class PostTypeSchema extends BaseSchema {
             [
               'param' => 'post_type',
               'operator' => '==',
-              'value' => $key,
+              'value' => $typeSchema['key'],
             ]
           ]
         ]));
@@ -72,10 +79,17 @@ class PostTypeSchema extends BaseSchema {
 
         // register post type options pages
         $parent->addOptions(Utils::MergeEach($typeSchema['@options'], [
-          'parent_slug' => "edit.php?post_type={$key}"
+          'parent_slug' => "edit.php?post_type={$typeSchema['key']}"
         ]));
         unset($typeSchema['@options']);
       }
+
+      if ($typeSchema['show_in_menu'] == false) {
+        unset($typeSchema['show_in_menu']);
+      }
+
+      $key = (string)$typeSchema['key'];
+      unset($typeSchema['key']);
 
       // create register code.
       $code = join('',[

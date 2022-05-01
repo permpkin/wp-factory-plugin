@@ -6,7 +6,7 @@ class ScriptSchema extends BaseSchema {
 
   static $defaults = [
     'path' => null,
-    'insert' => [],
+    'location' => 'front',
     'dependencies' => [],
     'version' => '0.1',
     'footer' => true
@@ -15,12 +15,12 @@ class ScriptSchema extends BaseSchema {
   static function compile($parent, $args, $return=false)
   {
     $code_cache = [];
-    foreach($args as $id=>$opt)
+    foreach($args as $index=>$opt)
     {
       // merge defaults
       $script = array_merge(ScriptSchema::$defaults, $opt);
       // setup codebase
-      $code = 'wp_enqueue_script(\''.$id.'\',\''.$script['source'].'\',';
+      $code = 'wp_enqueue_script(\''.$script['key'].'\',\''.$script['source'].'\',';
       // dependencies
       $code .= sizeof($script['dependencies'])>0?$parent->ARS.'\''.join('\',\'', $script['dependencies']).'\''.$parent->ARN:'false';
       // version
@@ -31,7 +31,7 @@ class ScriptSchema extends BaseSchema {
       $code_cache[] = $code;
       if (!$return) {
         // insert into front/back hooks
-        $parent->injectScriptHooks($script['insert'], $code);
+        $parent->injectScriptHooks($script['location'], $code);
       }
     }
     if ($return)

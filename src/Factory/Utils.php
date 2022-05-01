@@ -38,10 +38,20 @@ class Utils {
       {
         $segment .= '['.Utils::ArrayToString($val).']';
       }
-      // otherwise define value as string.
-      else
+      // if is defined string.
+      else if (is_string($val))
       {
         $segment .= '\''.$val.'\'';
+      }
+      // if is defined boolean.
+      else if (is_bool($val))
+      {
+        $segment .= $val ? 'true' : 'false';
+      }
+      // otherwise define value as supplied.
+      else
+      {
+        $segment .= $val;
       };
       $segments[] = $segment;
     }

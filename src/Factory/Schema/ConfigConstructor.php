@@ -57,19 +57,25 @@ class ConfigConstructor
   public function build()
   {
     $this->configSchema
-      ->addOrigins($this->isValid('origins')?$this->configSource['origins']:[])
-      ->addSupport($this->isValid('supports')?$this->configSource['supports']:[])
+      ->addSettings(array_merge(
+        $this->isValid('settings')?$this->configSource['settings']:[],
+        Utils::GetConfig(Utils::GetThemeSrc().'/settings')
+      ))
       ->addTypes(array_merge(
         $this->isValid('types')?$this->configSource['types']:[],
         Utils::GetConfig(Utils::GetThemeSrc().'/types')
+      ))
+      ->addTaxonomies(array_merge(
+        $this->isValid('taxonomies')?$this->configSource['taxonomies']:[],
+        Utils::GetConfig(Utils::GetThemeSrc().'/taxonomies')
       ))
       ->addBlocks(array_merge(
         $this->isValid('blocks')?$this->configSource['blocks']:[],
         Utils::GetEachConfig(Utils::GetThemeSrc().'/blocks')
       ))
-      ->addSettings(array_merge(
-        $this->isValid('settings')?$this->configSource['settings']:[],
-        Utils::GetConfig(Utils::GetThemeSrc().'/settings')
+      ->addCustomise(array_merge(
+        $this->isValid('customise')?$this->configSource['customise']:[],
+        Utils::GetConfig(Utils::GetThemeSrc().'/customise')
       ))
       ->addOptions(array_merge(
         $this->isValid('options')?$this->configSource['options']:[],
@@ -79,10 +85,10 @@ class ConfigConstructor
         $this->isValid('fields')?$this->configSource['fields']:[],
         Utils::GetEachConfig(Utils::GetThemeSrc().'/fields')
       ))
-      ->addPages(array_merge(
-        $this->isValid('pages')?$this->configSource['pages']:[],
-        Utils::GetConfig(Utils::GetThemeSrc().'/pages')
-      ))
+      // ->addPages(array_merge(
+      //   $this->isValid('pages')?$this->configSource['pages']:[],
+      //   Utils::GetConfig(Utils::GetThemeSrc().'/pages')
+      // ))
       ->addStyles($this->isValid('styles')?$this->configSource['styles']:[])
       ->addScripts($this->isValid('scripts')?$this->configSource['scripts']:[])
       ->compileBlockCategories($this->overrides('hide_block_categories'));

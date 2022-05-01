@@ -56,6 +56,12 @@ class Config {
 
   static function validate($type="all") {
 
+    return json_encode([
+      "valid" => false,
+      "errors" => [
+      ]
+    ]);
+
     if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
     {
 
@@ -137,32 +143,45 @@ class Config {
 
     if (!file_exists($_SERVER['APP_PATH'].'/@config.json'))
     {
-      $errors[] = "@config.json file missing";
+      $errors[] = [
+        "label" => "@config.json file missing",
+        "message" => "create a \"@config.json\" file in the root of your project folder.",
+        "severity" => "medium"
+      ];
     }
 
     if (!file_exists(Utils::GetContentSrc().'/mu-plugins/factory-config.php'))
     {
       $errors[] = "factory config not deployed";
+      $errors[] = [
+        "label" => "@config.json file missing",
+        "message" => "create a \"@config.json\" file in the root of your project folder.",
+        "severity" => "medium"
+      ];
     }
 
     if (!is_dir(Utils::GetContentSrc().'/plugins/advanced-custom-fields'))
     {
       $errors[] = "missing acf plugin";
+      $errors[] = [
+        "label" => "missing acf plugin",
+        "message" => "download the \"Advanced Custom Fields\" to enable custom fields options.",
+        "severity" => "low"
+      ];
     }
 
     if (!file_exists(Utils::GetSrc().'/wp-config.php'))
     {
-      $errors[] = "missing wp-config.php";
+      $errors[] = [
+        "label" => "missing wp-config.php",
+        "message" => "click \"generate wp-config\" to resolve.",
+        "severity" => "high"
+      ];
     }
-
-    // TODO: run various setup checks (missing plugins?)
-    // - is local and wp-mail not overridden
-    // - wp config setup correctly?
-    // - uncompiled blocks/styles
-    // - blocks that don't exist in config (but folders do)
     
     return json_encode(empty($errors) ? [
-      "valid" => true
+      "valid" => true,
+      "errors" => []
     ] : [
       "valid" => false,
       "errors" => $errors

@@ -32,31 +32,17 @@
           "required": false
         },
         "disabled_admin_pages": {
-          "label": "Disabled Admin Pages",
+          "label": "Disable Admin Pages",
           "description": "Define admin pages to disable for users.",
           "type": "string[]",
-          "placeholder": "e.g. /plugins",
+          "placeholder": "e.g. admin.php?page=my-plugin",
           "required": false
         },
         "disabled_user_roles": {
-          "label": "Disabled User Roles",
+          "label": "Disable User Roles",
           "description": "Define user_roles to disable for users.",
           "type": "string[]",
           "placeholder": "e.g. editor",
-          "required": false
-        },
-        "image_sizes": {
-          "label": "Image Sizes",
-          "description": "Enabled default Image sizes.",
-          "type": "string[]",
-          "placeholder": "150x150, 256x256",
-          "required": false
-        },
-        "hide_block_categories": {
-          "label": "Hide Block Categories",
-          "description": "List Block categories to hide from the admin interface.",
-          "type": "string[]",
-          "placeholder": "wordpress, acf",
           "required": false
         }
       }

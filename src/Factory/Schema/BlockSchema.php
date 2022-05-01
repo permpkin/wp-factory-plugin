@@ -22,7 +22,7 @@ class BlockSchema extends ConfigSchema {
 
   static function compile($parent, $args)
   {
-    foreach($args as $key => $block)
+    foreach($args as $index => $block)
     {
       if (empty($block)) continue;
       
@@ -30,7 +30,7 @@ class BlockSchema extends ConfigSchema {
       $blockSchema = array_merge(BlockSchema::$defaults, $block);
 
       // set template source.
-      $blockSchema["render_template"] = Utils::ThemeUrl('src/blocks/'.$key.'/template.php');
+      $blockSchema["render_template"] = Utils::ThemeUrl('src/blocks/'.$blockSchema['key'].'/template.php');
 
       // if either @styles or @scripts are set, inject them into the block queue_assets method.
       if (isset($blockSchema['@styles']) || isset($blockSchema['@scripts']))
@@ -58,12 +58,16 @@ class BlockSchema extends ConfigSchema {
             [
               'param' => 'block',
               'operator' => '==',
-              'value' => "acf/{$key}"
+              'value' => "acf/{$blockSchema['key']}"
             ]
           ]
         ]));
         unset($blockSchema['@fields']);
       }
+
+      $blockSchema['name'] = $blockSchema['key'];
+
+      unset($blockSchema['key']);
 
       // create register code.
       $code = [

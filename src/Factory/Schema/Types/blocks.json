@@ -8,31 +8,27 @@
       "expandable": true,
       "schema": {
         "key": {
-          "label": "Key",
-          "description": "(String) A unique identifier for internal purposes.",
+          "label": "ID",
+          "description": "(String) A unique name that identifies the block (without namespace). For example 'testimonial'. Note: A block name can only contain lowercase alphanumeric characters and dashes, and must begin with a letter.",
           "type": "id",
-          "required": true,
+          "default": "",
           "placeholder": "my-custom-block"
         },
-        "name": {
-          "label": "Name",
-          "description": "(String) A unique name that identifies the block (without namespace). For example ‘testimonial’. Note: A block name can only contain lowercase alphanumeric characters and dashes, and must begin with a letter.",
-          "type": "text",
-          "required": true,
-          "placeholder": "My Custom Block"
-        },
         "title": {
-          "label": "Title",
-          "description": "(String) The display title for your block. For example ‘Testimonial’.",
-          "type": "text",
+          "label": "Name",
+          "description": "(String) The display name for your block. For example 'Testimonial'.",
+          "type": "name",
+          "default": "",
           "required": true,
-          "placeholder": "Custom Block"
+          "placeholder": "Custom Block",
+          "keyRef": "key"
         },
         "description": {
           "label": "Block Description",
           "description": "(String) (Optional) This is a short description for your block.",
           "type": "textarea",
           "placeholder": "My descriptive summary...",
+          "required": true,
           "default": ""
         },
         "category": {
@@ -40,6 +36,7 @@
           "description": "(String) Blocks are grouped into categories to help users browse and discover them. The core provided categories are [ common | formatting | layout | widgets | embed ]. Plugins and Themes can also register custom block categories.",
           "type": "string[]",
           "placeholder": "my-category",
+          "default": "",
           "autocomplete": [
             "common",
             "formatting",
@@ -54,6 +51,7 @@
           "description": "(String|Array) (Optional) An icon property can be specified to make it easier to identify a block. These can be any of WordPress’ Dashicons, or a custom svg element.",
           "type": "select",
           "required": true,
+          "default": "",
           "placeholder": "dashicon-*",
           "options": [
             "menu",
@@ -405,6 +403,7 @@
           "label": "Keywords",
           "description": "(Array) (Optional) An array of search terms to help user discover the block while searching.",
           "type": "string[]",
+          "default": "",
           "placeholder": "banner, form"
         }
       }
@@ -418,6 +417,7 @@
           "description": "(Array) (Optional) An array of post types to restrict this block type to.",
           "placeholder": "post, product",
           "type": "type[]",
+          "default": [],
           "typeRelation": "post_type"
         },
         "mode": {
@@ -430,7 +430,7 @@
             "edit"
           ],
           "multi": false,
-          "default": "preview"
+          "default": "auto"
         },
         "align": {
           "label": "Align",
@@ -451,6 +451,7 @@
           "description": "(Array) (Optional) An array of features to support. All properties from the JavaScript block supports documentation may be used. The following options are supported:",
           "placeholder": "anchor, align",
           "type": "string[]",
+          "default": "",
           "autocomplete": [
             "anchor",
             "alignWide",
@@ -481,18 +482,13 @@
       "expandable": true,
       "schema": {
         "@fields": {
-          "label": "Fields",
+          "label": "Field Groups",
           "description": "(array) An array of fields",
           "type": "repeater",
           "repeater": "fields",
-          "force": {
-            "object_type": [
-              "!this"
-            ]
-          },
           "columns": [
             {
-              "label": "Key",
+              "label": "ID",
               "key": "key",
               "type": "key"
             },
@@ -501,30 +497,7 @@
               "key": "description"
             }
           ],
-          "required": true
-        },
-        "@types": {
-          "label": "Post Types",
-          "description": "(array) An array of post_types",
-          "type": "repeater",
-          "repeater": "types",
-          "force": {
-            "object_type": [
-              "!this"
-            ]
-          },
-          "columns": [
-            {
-              "label": "Key",
-              "key": "key",
-              "type": "key"
-            },
-            {
-              "label": "Description",
-              "key": "description"
-            }
-          ],
-          "required": true
+          "default": []
         },
         "@styles": {
           "label": "Styles",
@@ -533,7 +506,7 @@
           "repeater": "styles",
           "columns": [
             {
-              "label": "Key",
+              "label": "ID",
               "key": "key",
               "type": "key"
             },
@@ -542,7 +515,7 @@
               "key": "source"
             }
           ],
-          "required": true
+          "default": []
         },
         "@scripts": {
           "label": "Scripts",
@@ -551,7 +524,7 @@
           "repeater": "scripts",
           "columns": [
             {
-              "label": "Key",
+              "label": "ID",
               "key": "key",
               "type": "key"
             },
@@ -560,16 +533,19 @@
               "key": "source"
             }
           ],
-          "required": true
+          "default": []
         }
       }
     }
   ],
+  "actions": {
+    "Build Block": "/build/blocks/{key}"
+  },
   "table": {
     "columns": [
       {
-        "label": "Key/ID",
-        "key": "key",
+        "label": "ID/Name",
+        "key": "title",
         "type": "key"
       },
       {

@@ -8,11 +8,12 @@
       "expandable": true,
       "schema": {
         "key": {
-          "label": "Key",
+          "label": "ID",
           "description": "(string) Unique identifier for field group.",
           "type": "id",
           "prefix": "group_",
           "required": true,
+          "default": "",
           "placeholder": "my-field-group"
         },
         "label": {
@@ -20,12 +21,14 @@
           "description": "(string) Visible in metabox handle",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "My Field Group"
         },
         "type": {
           "label": "Type",
           "description": "(string) Type of field",
           "type": "select",
+          "default": [],
           "options": [
             "text",
             "image",
@@ -38,7 +41,7 @@
   "table": {
     "columns": [
       {
-        "label": "Key/ID",
+        "label": "ID/Name",
         "key": "key",
         "type": "key"
       },

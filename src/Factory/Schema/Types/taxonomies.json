@@ -8,11 +8,20 @@
       "expandable": true,
       "schema": {
         "key": {
-          "label": "Key",
+          "label": "ID",
           "description": "(string) (Required) Taxonomy key, must not exceed 32 characters.",
           "type": "id",
-          "required": true,
+          "default": "",
           "placeholder": "my-custom-taxonomy"
+        },
+        "label": {
+          "label": "Name",
+          "description": "(string) Name of the Taxonomy shown in the menu. Usually plural. Default is value of $labels['name'].",
+          "type": "name",
+          "keyRef": "key",
+          "required": true,
+          "default": "",
+          "placeholder": "My Custom Taxonomy"
         },
         "object_type": {
           "label": "Post Types",
@@ -20,12 +29,14 @@
           "placeholder": "post, product",
           "type": "type[]",
           "typeRelation": "post_type",
+          "default": [],
           "required": true
         },
         "labels": {
           "label": "Labels",
           "description": "(array) An array of labels for this taxonomy. By default, Tag labels are used for non-hierarchical taxonomies, and Category labels are used for hierarchical taxonomies. See accepted values in get_taxonomy_labels().",
           "type": "keys",
+          "default": {},
           "keys": {
             "name": {
               "type": "text",
@@ -114,7 +125,8 @@
           "description": "(string) A short descriptive summary of what the taxonomy is for.",
           "type": "textarea",
           "placeholder": "My descriptive summary...",
-          "default": ""
+          "default": "",
+          "required": true
         }
       }
     },
@@ -300,7 +312,7 @@
     "columns": [
       {
         "label": "Key/ID",
-        "key": "key",
+        "key": "label",
         "type": "key"
       },
       {

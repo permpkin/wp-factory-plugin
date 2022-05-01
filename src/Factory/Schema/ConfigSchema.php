@@ -74,24 +74,20 @@ class ConfigSchema {
    * @param inserts
    * @param code
    */
-  public function injectScriptHooks($inserts, $code)
+  public function injectScriptHooks($insert, $code)
   {
-    foreach($inserts as $insertTo)
+    switch ($insert)
     {
-      switch ($insertTo)
-      {
-        case 'front':
-          $this->addHook('wp_enqueue_scripts', $code);
-        break;
-        case 'back':
-        case 'admin':
-          $this->addHook('admin_enqueue_scripts', $code);
-        break;
-        case 'both':
-          $this->addHook('admin_enqueue_scripts', $code);
-          $this->addHook('wp_enqueue_scripts', $code);
-        break;
-      }
+      case 'front':
+        $this->addHook('wp_enqueue_scripts', $code);
+      break;
+      case 'back':
+        $this->addHook('admin_enqueue_scripts', $code);
+      break;
+      case 'both':
+        $this->addHook('admin_enqueue_scripts', $code);
+        $this->addHook('wp_enqueue_scripts', $code);
+      break;
     };
     return $this;
   }
@@ -113,24 +109,11 @@ class ConfigSchema {
    * Register allowed origins to filter.
    * @param args array of origin domains
    */
-  public function addOrigins($args)
+  public function addSettings($args)
   {
     if (empty($args)) return $this;
-    
-    $this->addHook('init', OriginSchema::compile($this, $args));
 
-    return $this;
-  }
-
-  /**
-   * Register theme support key pairs.
-   * @param args array of support options
-   */
-  public function addSupport($args)
-  {
-    if (empty($args)) return $this;
-    
-    $this->addHook('after_setup_theme', SupportSchema::compile($this, $args));
+    SettingsSchema::compile($this, $args);
 
     return $this;
   }
@@ -183,6 +166,18 @@ class ConfigSchema {
   }
 
   /**
+   * WP Custom Post Types
+   */
+  public function addTaxonomies($args)
+  {
+    if (empty($args)) return $this;
+
+    TaxonomySchema::compile($this, $args);
+    
+    return $this;
+  }
+
+  /**
    * WP Custom "Options" Pages
    */
   public function addOptions($args)//, $method='acf_add_options_page')
@@ -223,7 +218,7 @@ class ConfigSchema {
   {
     if (empty($this->blockCategories)) return $this;
     
-    $code = 'add_filter(\'block_categories\',function($categories,$post){';
+    $code = 'add_filter(\'block_categories_all\',function($categories,$post){';
 
     // check for override filters
     if (is_array($overrides))
@@ -262,7 +257,7 @@ class ConfigSchema {
     $code .= $this->ARN;
     $code .= ');';
 
-    $code .= '});';
+    $code .= '},10,2);';
 
     $this->addHook('acf/init', $code);
 
@@ -284,11 +279,11 @@ class ConfigSchema {
   /**
    * WP Customizer settings
    */
-  public function addSettings($args)
+  public function addCustomise($args)
   {
     if (empty($args)) return $this;
 
-    SettingSchema::compile($this, $args);
+    CustomiseSchema::compile($this, $args);
 
     return $this;
   }

@@ -8,9 +8,10 @@
       "expandable": true,
       "schema": {
         "key": {
-          "label": "Key",
+          "label": "ID",
           "description": "(string) Unique identifier for internal purposes.",
           "type": "id",
+          "default": "",
           "required": true
         },
         "page_title": {
@@ -18,12 +19,14 @@
           "description": "(string) (Required) The text to be displayed in the title tags of the page when the menu is selected.",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "My Page Title"
         },
         "type": {
           "label": "Page Type",
           "description": "(string) (Required) What type of page this should be registered as.",
           "type": "select",
+          "default": "",
           "options": [
             "option",
             "comments",
@@ -50,12 +53,14 @@
           "description": "(string) (Required) The text to be used for the menu.",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "My Custom Page"
         },
         "capability": {
           "label": "Capability",
           "description": "(string) (Required) The capability required for this menu to be displayed to the user.",
           "type": "string[]",
+          "default": [],
           "required": true
         },
         "menu_slug": {
@@ -63,6 +68,7 @@
           "description": "(string) (Required) The slug name to refer to this menu by. Should be unique for this menu page and only include lowercase alphanumeric, dashes, and underscores characters to be compatible with sanitize_key().",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "my-custom-page"
         },
         "function": {
@@ -70,6 +76,7 @@
           "description": "(callable) (Optional) The function to be called to output the content for this page.",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "my_function"
         },
         "icon_url": {
@@ -77,6 +84,7 @@
           "description": "(string) (Optional) The URL to the icon to be used for this menu.",
           "type": "text",
           "required": true,
+          "default": "",
           "placeholder": "dashicon-*"
         },
         "position": {
@@ -84,6 +92,7 @@
           "description": "(int) (Optional) The position in the menu order this item should appear.",
           "type": "number",
           "required": true,
+          "default": "0",
           "placeholder": "0"
         }
       }
@@ -97,10 +106,10 @@
           "description": "(array) An array of styles",
           "type": "repeater",
           "repeater": "styles",
-          "required": true,
+          "default": [],
           "columns": [
             {
-              "label": "Key",
+              "label": "ID",
               "key": "key",
               "type": "key"
             },
@@ -115,10 +124,10 @@
           "description": "(array) An array of scripts",
           "type": "repeater",
           "repeater": "scripts",
-          "required": true,
+          "default": [],
           "columns": [
             {
-              "label": "Key",
+              "label": "ID",
               "key": "key",
               "type": "key"
             },
@@ -134,7 +143,7 @@
   "table": {
     "columns": [
       {
-        "label": "Key/ID",
+        "label": "ID/Name",
         "key": "key",
         "type": "key"
       },

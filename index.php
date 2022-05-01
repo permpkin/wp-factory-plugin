@@ -53,9 +53,10 @@ SimpleRouter::group(['prefix' => '/wp/factory/api/config'], function () {
 
   // compile config to php.
   SimpleRouter::post('/deploy', [Config::class, 'deploy']);
+  SimpleRouter::get('/deploy', [Config::class, 'deploy']); // TEMP
 
   // check missing fields not present in config or non-deployed blocks.
-  SimpleRouter::post('/verify', [Config::class, 'verify']);
+  SimpleRouter::get('/verify', [Config::class, 'verify']);
 
 });
 

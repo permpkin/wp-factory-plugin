@@ -9,12 +9,20 @@
       "expandable": true,
       "schema": {
         "key": {
-          "label": "Key",
+          "label": "ID",
           "description": "(string) (Required) Name of the style. Should be unique.",
           "type": "id",
-          "required": true,
           "placeholder": "my-custom-style",
           "default": ""
+        },
+        "label": {
+          "label": "Name",
+          "description": "(string) Name of the Style, Used for internal purposes only.",
+          "type": "name",
+          "keyRef": "key",
+          "required": true,
+          "default": "",
+          "placeholder": "My CSS Script"
         },
         "source": {
           "label": "Source",
@@ -40,9 +48,13 @@
         "location": {
           "label": "Location",
           "description": "(string[]) (Optional) An array of areas to inject this style. Available values are 'front', 'back' or 'both'.\n\t\t\tDefault value: array('front')",
-          "type": "string[]",
-          "default": [
-            "front"
+          "type": "select",
+          "placeholder": "front",
+          "default": "front",
+          "options": [
+            "front",
+            "back",
+            "both"
           ]
         },
         "footer": {
@@ -75,8 +87,8 @@
   "table": {
     "columns": [
       {
-        "label": "Key/ID",
-        "key": "key",
+        "label": "ID/Name",
+        "key": "label",
         "type": "key"
       },
       {
@@ -97,7 +109,7 @@
       {
         "label": "Location",
         "key": "location",
-        "type": "string[]"
+        "type": "string"
       },
       {
         "label": "Footer",
