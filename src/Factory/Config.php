@@ -141,8 +141,12 @@ class Config {
 
     $errors = [];
 
-    if (!file_exists($_SERVER['APP_PATH'].'/@config.json'))
+    if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
     {
+      // TODO: do config validation.
+      $config = json_decode(file_get_contents($_SERVER['APP_PATH'].'/@config.json'));
+      //
+    } else {
       $errors[] = [
         "label" => "@config.json file missing",
         "message" => "create a \"@config.json\" file in the root of your project folder.",
@@ -154,9 +158,9 @@ class Config {
     {
       $errors[] = "factory config not deployed";
       $errors[] = [
-        "label" => "@config.json file missing",
-        "message" => "create a \"@config.json\" file in the root of your project folder.",
-        "severity" => "medium"
+        "label" => "factory-config.php file not present",
+        "message" => "@config has not yet been deployed to your instance.",
+        "severity" => "low"
       ];
     }
 
