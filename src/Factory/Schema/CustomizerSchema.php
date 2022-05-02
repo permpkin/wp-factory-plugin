@@ -6,7 +6,7 @@ use Factory\Utils;
 
 // TODO: Fix this, is still using legacy keys.
 
-class SettingSchema extends BaseSchema {
+class CustomizerSchema extends BaseSchema {
 
   static $defaults = [
     'title'      => '',
