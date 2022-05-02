@@ -6,13 +6,8 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;36m'
 NC='\033[0m' # No Color
 
-tput sc
-echo "${BLUE}WP Config$NC"; # Start WP Config
 if [ ! -f "public/wp-config.php" ]; then
-
-tput rc; tput el
 echo "${BLUE}WP Config → Building...$NC";
-
 ## wp config variable definitions
 WP_DEFINE_LIST=(
   "DB_NAME=getenv(\"MYSQL_DATABASE\")"
@@ -25,7 +20,6 @@ WP_DEFINE_LIST=(
   "WP_REDIS_BACKEND_DB=empty(getenv(\"WP_REDIS_BACKEND_DB\"))?0:getenv(\"WP_REDIS_BACKEND_DB\")"
 );
 
-tput rc; tput el;
 WP_MULTISITE=""
 read -r -p "WP Config → Add Multisite Settings? [y/N]" WP_MULTISITE
 
@@ -39,7 +33,6 @@ cat <<EOF > public/wp-config.php
 \$table_prefix = getenv(\"MYSQL_TABLE_PREFIX\");
 EOF
 
-tput rc; tput el
 echo "${BLUE}WP Config → importing wordpress salts...$NC";
 
 # generate wp-config.php with salts
@@ -97,15 +90,25 @@ define("THEME_NAME", "$THEME_NAME");
 define("WP_DEFAULT_THEME", "$THEME_NAME");
 require_once(ABSPATH . 'wp-settings.php');
 EOF
-
-  tput rc; tput el
-  echo "${GREEN}WP Config → ✅$NC"
-
+echo "${GREEN}WP Config → ✅$NC"
 fi; # End WP Config
 
+#
+# Save WP Utils for Factory.
+#
+if [ ! -f "public/wp-content/mu-plugins/factory-utils.php" ]; then
 echo "${BLUE}Saving Factory Utils$NC"
-
 mkdir -p public/wp-content/mu-plugins
 curl -o public/wp-content/mu-plugins/factory-utils.php https://gist.githubusercontent.com/permpkin/53cf60dd16491e9c1795b5ca08d5ce3e/raw/7a316a9bfbe22acb02a078e09ec8560f67a8e469/factory-utils.php 2>/dev/null
-
 echo "${GREEN}Saved Factory Utils$NC"
+fi;
+
+#
+# Save Valet Driver for Factory.
+#
+if [ ! -f "$HOME/.config/valet/drivers/WordpressFactoryValetDriver.php" ]; then
+echo "${BLUE}Saving Factory Valet Driver$NC"
+mkdir -p "$HOME/.config/valet/drivers/"
+curl -o "$HOME/.config/valet/drivers/WordpressFactoryValetDriver.php" "https://gist.githubusercontent.com/permpkin/f1c0434796c3c9230f39a1704637a3f4/raw/d09524bc99067b50644abcd4311c0a9d4b169123/WordpressFactoryValetDriver.php" 2>/dev/null
+echo "${GREEN}Saved Factory Valet Driver$NC"
+fi;
