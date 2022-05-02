@@ -44,6 +44,69 @@
           "type": "string[]",
           "placeholder": "e.g. editor",
           "required": false
+        },
+        "disable_global_styles": {
+          "label": "Disable Global Styles Meta",
+          "description": "Removes global-styles-inline-css from front-end meta.",
+          "type": "boolean",
+          "default": false,
+          "required": false
+        },
+        "disable_adminbar": {
+          "label": "Disable Adminbar on front-end",
+          "description": "Removes admin bar from front-end and removes the option to enable it.",
+          "type": "boolean",
+          "default": false,
+          "required": false
+        },
+        "remove_generator_meta": {
+          "label": "Remove \"Generator\" meta",
+          "description": "Removes generator meta, improves security.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "remove_wp_emojis": {
+          "label": "Remove wordpress \"Emojicons\" library",
+          "description": "Removes emojicons js/css registers, improves front-end performance.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "remove_oembed": {
+          "label": "Remove OEmbed Meta",
+          "description": "Removes the OEmbed meta from the front-end header meta, Prevents wordpress->wordpress smart embedding.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "remove_api_meta": {
+          "label": "Remove JSON API Meta",
+          "description": "Removes the API meta from the front-end, Caution: This can break certain plugins.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "disable_rss_feed": {
+          "label": "Disable RSS Feed",
+          "description": "Removes RSS Feed functions.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "remove_wlwmanifest_link": {
+          "label": "Remove Windows Live Writer manifest file",
+          "description": "Removes the Windows Live Writer manifest file meta from the front-end header meta.",
+          "type": "boolean",
+          "default": true,
+          "required": false
+        },
+        "remove_rsd_link": {
+          "label": "Remove Really Simple Discovery service endpoint",
+          "description": "Removes the Really Simple Discovery service endpoint meta from the front-end header meta.",
+          "type": "boolean",
+          "default": true,
+          "required": false
         }
       }
     },
