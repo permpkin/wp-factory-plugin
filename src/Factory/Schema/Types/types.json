@@ -59,39 +59,57 @@
           "keys": {
             "name": {
               "type": "text",
-              "placeholder": "Post Types"
+              "placeholder": "Post Types",
+              "defaultFrom" : "label+s",
+              "default": ""
             },
             "singular_name": {
               "type": "text",
-              "placeholder": "Post Type"
+              "placeholder": "Post Type",
+              "defaultFrom" : "label",
+              "default": ""
             },
             "menu_name": {
               "type": "text",
-              "placeholder": "Post Types"
+              "placeholder": "Post Types",
+              "defaultFrom" : "label+s",
+              "default": ""
             },
             "name_admin_bar": {
               "type": "text",
-              "placeholder": "Post Type"
+              "placeholder": "Post Type",
+              "defaultFrom" : "label",
+              "default": ""
             },
             "archives": {
               "type": "text",
-              "placeholder": "Item Archives"
+              "placeholder": "Item Archives",
+              "defaultFrom" : "label+ Archives",
+              "default": ""
             },
             "attributes": {
               "type": "text",
-              "placeholder": "Item Attributes"
+              "placeholder": "Item Attributes",
+              "defaultFrom" : "label+ Attributes",
+              "default": ""
             },
             "parent_item_colon": {
               "type": "text",
-              "placeholder": "Parent Item:"
+              "placeholder": "Parent Item:",
+              "defaultFrom" : "Parent -label+:",
+              "default": ""
             },
             "all_items": {
               "type": "text",
-              "placeholder": "All Items"
+              "placeholder": "All Items",
+              "defaultFrom" : "All -label+s",
+              "default": ""
             },
             "add_new_item": {
               "type": "text",
-              "placeholder": "Add New Item"
+              "placeholder": "Add New Item",
+              "defaultFrom" : "Add New -label",
+              "default": ""
             },
             "add_new": {
               "type": "text",
