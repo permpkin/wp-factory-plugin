@@ -71,7 +71,7 @@ class ConfigConstructor
       ))
       ->addBlocks(array_merge(
         $this->isValid('blocks')?$this->configSource['blocks']:[],
-        Utils::GetEachConfig(Utils::GetThemeSrc().'/blocks')
+        // Utils::GetEachConfig(Utils::GetThemeSrc().'/blocks')
       ))
       ->addCustomise(array_merge(
         $this->isValid('customise')?$this->configSource['customise']:[],
@@ -83,7 +83,7 @@ class ConfigConstructor
       ))
       ->addFields(array_merge(
         $this->isValid('fields')?$this->configSource['fields']:[],
-        Utils::GetEachConfig(Utils::GetThemeSrc().'/fields')
+        // Utils::GetEachConfig(Utils::GetThemeSrc().'/fields')
       ))
       // ->addPages(array_merge(
       //   $this->isValid('pages')?$this->configSource['pages']:[],
@@ -112,16 +112,6 @@ class ConfigConstructor
   public function compile()
   {
     $output = [
-      "<?php ".$this->EOL,
-      "/*".$this->EOL,
-      "Plugin Name: WP Factory Config".$this->EOL,
-      "Plugin URI: https://github.com/permpkin/wp-factory".$this->EOL,
-      "Description: Build script compiled using wp-factory.".$this->EOL,
-      "Version: 1.0.0".$this->EOL,
-      "Author: Permpkin".$this->EOL,
-      "Author URI: https://github.com/permpkin/".$this->EOL,
-      "*/".$this->EOL,
-      "if(!defined('ABSPATH'))exit;".$this->EOL,
     ];
     foreach($this->configSchema->hooks as $hook=>$actions)
     {

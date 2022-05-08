@@ -259,7 +259,7 @@ class ConfigSchema {
 
     $code .= '},10,2);';
 
-    $this->addHook('acf/init', $code);
+    $this->addHook('init', $code);
 
     return $this;
   }

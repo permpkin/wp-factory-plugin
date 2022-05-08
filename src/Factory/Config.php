@@ -10,7 +10,7 @@ class Config {
 
   static function get() {
     
-    return file_get_contents($_SERVER['APP_PATH'].'/@config.json');
+    return file_get_contents($_SERVER['APP_PATH'].'/src/@config.json');
 
   }
 
@@ -18,7 +18,7 @@ class Config {
 
     $config = Config::get();
     
-    file_put_contents($_SERVER['APP_PATH'].'/@config.json', array_merge_recursive($config, $data));
+    file_put_contents($_SERVER['APP_PATH'].'/src/@config.json', array_merge_recursive($config, $data));
     
     return json_encode([
       "success"=>true
@@ -30,7 +30,7 @@ class Config {
     
     $value = json_encode(input('config'), JSON_PRETTY_PRINT);
     
-    file_put_contents($_SERVER['APP_PATH'].'/@config.json', $value);
+    file_put_contents($_SERVER['APP_PATH'].'/src/@config.json', $value);
     
     return json_encode([
       "success"=>true
@@ -62,12 +62,12 @@ class Config {
       ]
     ]);
 
-    if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
+    if (file_exists($_SERVER['APP_PATH'].'/src/@config.json'))
     {
 
       $validator = new Validator;
 
-      $data = json_decode(file_get_contents($_SERVER['APP_PATH'].'/@config.json'));
+      $data = json_decode(file_get_contents($_SERVER['APP_PATH'].'/src/@config.json'));
 
       $validator->validate($data, (object)['$ref' => 'file://'.__DIR__.'/Schema.json']);
 
@@ -89,7 +89,7 @@ class Config {
         ]);
       }
 
-      $config = new ConfigConstructor(Utils::GetConfigJSON($_SERVER['APP_PATH'].'/@config.json'));
+      $config = new ConfigConstructor(Utils::GetConfigJSON($_SERVER['APP_PATH'].'/src/@config.json'));
 
       $config->build();
 
@@ -114,14 +114,29 @@ class Config {
 
   static function deploy() {
 
-    if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
+    if (file_exists($_SERVER['APP_PATH'].'/src/@config.json'))
     {
 
-      $config = new ConfigConstructor(Utils::GetConfigJSON($_SERVER['APP_PATH'].'/@config.json'));
+      $config_data = Utils::GetConfigJSON($_SERVER['APP_PATH'].'/src/@config.json');
+
+      $config = new ConfigConstructor($config_data);
 
       $config->build();
 
-      file_put_contents(Utils::GetContentSrc().'/mu-plugins/factory-config.php', $config->compile());
+      $header_prefix = [
+        "<?php ",
+        "/*",
+        "Plugin Name: WP Factory Config",
+        "Plugin URI: https://github.com/permpkin/wp-factory",
+        "Description: Build script compiled using wp-factory.",
+        "Version: ".$config_data['schemaVersion'],
+        "Author: Permpkin",
+        "Author URI: https://github.com/permpkin/",
+        "*/",
+        "if(!defined('ABSPATH'))exit;",
+      ];
+
+      file_put_contents(Utils::GetContentSrc().'/mu-plugins/factory-config.php', join("\r\n", $header_prefix).$config->compile());
 
       return json_encode([
         "success"=>true
@@ -141,10 +156,10 @@ class Config {
 
     $errors = [];
 
-    if (file_exists($_SERVER['APP_PATH'].'/@config.json'))
+    if (file_exists($_SERVER['APP_PATH'].'/src/@config.json'))
     {
       // TODO: do config validation.
-      $config = json_decode(file_get_contents($_SERVER['APP_PATH'].'/@config.json'));
+      $config = json_decode(file_get_contents($_SERVER['APP_PATH'].'/src/@config.json'));
       //
     } else {
       $errors[] = [

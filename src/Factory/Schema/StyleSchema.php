@@ -5,7 +5,7 @@ namespace Factory\Schema;
 class StyleSchema extends BaseSchema {
 
   static $defaults = [
-    'path' => null,
+    'source' => null,
     'location' => 'front',
     'dependencies' => [],
     'version' => '0.1',
@@ -20,11 +20,21 @@ class StyleSchema extends BaseSchema {
       // merge defaults
       $script = array_merge(StyleSchema::$defaults, $opt);
       // setup codebase
-      $code = 'wp_enqueue_style(\''.$script['key'].'\',\''.$script['source'].'\',';
+      $code = 'wp_enqueue_style(\''.$script['key'].'\','.(is_array($script['source'])?$script['source'][0]:'\''.$script['source'].'\'').',';
       // dependencies
-      $code .= sizeof($script['dependencies'])>0?$parent->ARS.'\''.join('\',\'', $script['dependencies']).'\''.$parent->ARN:'false';
+      if (!is_array($script['dependencies']) && substr((string)$script['dependencies'],0,1) == "$") {
+        $code .= $script['dependencies'];
+      } else if (!empty($script['dependencies'])) {
+        $code .= sizeof($script['dependencies'])>0?$parent->ARS.'\''.join('\',\'', $script['dependencies']).'\''.$parent->ARN:'false';
+      } else {
+        $code .= 'false';
+      }
       // version
-      $code .= ',\''.$script['version'].'\'';
+      if (!is_array($script['version']) && substr((string)$script['version'],0,1) == "$") {
+        $code .= ','.$script['version'];
+      } else {
+        $code .= ',\''.$script['version'].'\'';
+      }
       // media
       $code .= ',\''.$script['media'].'\');'.$parent->EOL;
       $code_cache[] = $code;
