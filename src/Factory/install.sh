@@ -17,7 +17,7 @@ WP_DEFINE_LIST=(
   "DB_HOST=\$_SERVER[\"MYSQL_HOST\"]"
   "DB_CHARSET=\"utf8mb4\""
   "WP_REDIS_BACKEND_HOST=\$_SERVER[\"WP_REDIS_BACKEND_HOST\"]"
-  "WP_REDIS_BACKEND_PORT=\$_SERVER[\"WP_REDIS_BACKEND_PORT\")"
+  "WP_REDIS_BACKEND_PORT=\$_SERVER[\"WP_REDIS_BACKEND_PORT\"]"
   "WP_REDIS_BACKEND_DB=\$_SERVER[\"WP_REDIS_BACKEND_DB\"]"
 );
 
@@ -71,9 +71,9 @@ for value in "${WP_DEFINE_LIST[@]}"
 do
   if [[ $value == *"="* ]]; then
     valueArray=(${value//\=/ })
-    echo "define(\"${valueArray[0]}\",${valueArray[1]});" >> public/wp-config.php
+    printf "define(\"${valueArray[0]}\",${valueArray[1]});\n" >> public/wp-config.php
   else
-    echo "define(\"$value\",\$_SERVER[\"$value\"]);" >> public/wp-config.php
+    printf "define(\"$value\",\$_SERVER[\"$value\"]);\n" >> public/wp-config.php
   fi
 done
 
