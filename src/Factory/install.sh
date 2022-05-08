@@ -100,7 +100,7 @@ fi; # End WP Config
 if [ ! -f "public/wp-content/mu-plugins/factory-utils.php" ]; then
 echo "${BLUE}Saving Factory Utils$NC"
 mkdir -p public/wp-content/mu-plugins
-curl -o public/wp-content/mu-plugins/factory-utils.php https://gist.githubusercontent.com/permpkin/53cf60dd16491e9c1795b5ca08d5ce3e/raw/7a316a9bfbe22acb02a078e09ec8560f67a8e469/factory-utils.php 2>/dev/null
+curl -o public/wp-content/mu-plugins/factory-utils.php https://gist.githubusercontent.com/permpkin/53cf60dd16491e9c1795b5ca08d5ce3e/raw/1b43d43849b4957bbd264c3393c50d8d0b99450e/factory-utils.php 2>/dev/null
 echo "${GREEN}Saved Factory Utils$NC"
 fi;
 
