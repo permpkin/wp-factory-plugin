@@ -119,10 +119,10 @@ class BlockSchema extends ConfigSchema {
           "}"
         ]));
 
-        // add block script
-        file_put_contents($source_folder."/block.jsx", join("\r\n",[
+        //$attributes
+        $block_template = [
           "import { registerBlockType } from '@wordpress/blocks';",
-          "import { useBlockProps } from '@wordpress/block-editor';",
+          "import { useBlockProps".(sizeof($attributes) > 0 ? ', RichText':'')." } from '@wordpress/block-editor';",
           "",
           "  registerBlockType('".$blockSchema['textdomain']."/".$blockSchema['key']."',",
           "{",
@@ -131,23 +131,69 @@ class BlockSchema extends ConfigSchema {
           "        const blockProps = useBlockProps();",
           "",
           "         return (",
-          "            <div { ...blockProps }>",
+          "            <div { ...blockProps }>"
+        ];
+        foreach($attributes as $attrKey => $attribute) {
+          // TODO: add more default schematics for other field types
+          if ($attribute['type'] !== "null") {
+            array_push($block_template,
+              "             <RichText value={attributes.".$attrKey."}",
+            );
+            if (!empty($attribute['default'])) {
+              array_push($block_template,
+              "               "."default=\"".$attribute['default']."\""
+              );
+            }
+            if (!empty($attribute['placeholder'])) {
+              array_push($block_template,
+              "               "."placeholder=\"".$attribute['placeholder']."\""
+              );
+            } else if (empty($attribute['placeholder']) && !empty($attribute['default'])) {
+              array_push($block_template,
+              "               "."placeholder=\"".$attribute['default']."\""
+              );
+            } else {
+              array_push($block_template,
+              "               "."placeholder=\"enter text here\""
+              );
+            }
+            array_push($block_template,
+              "               onChange={(value) => {",
+              "                 setAttributes({",
+              "                   ".$attrKey.": value",
+              "                 })",
+              "               }}",
+              "             />"
+            );
+          }
+        }
+        array_push($block_template,
           "            </div>",
           "        );",
           "",
           "     },",
-          "     save: function () {",
+          "     save: ({ attributes }) => {",
           "",
           "        const blockProps = useBlockProps.save();",
           "",
           "        return (",
           "            <div { ...blockProps }>",
+        );
+        foreach($attributes as $attrKey => $attribute) {
+          array_push($block_template,
+            "             <div>{attributes.".$attrKey."}</div>"
+          );
+        }
+        array_push($block_template,
           "            </div>",
           "        );",
           "",
           "     },",
           " });"
-        ]));
+        );
+
+        // add block script
+        file_put_contents($source_folder."/block.jsx", join("\r\n",$block_template));
 
       }
 
