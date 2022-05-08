@@ -71,9 +71,11 @@ for value in "${WP_DEFINE_LIST[@]}"
 do
   if [[ $value == *"="* ]]; then
     valueArray=(${value//\=/ })
-    printf "define(\"${valueArray[0]}\",${valueArray[1]});\n" >> public/wp-config.php
+    printf "define(\"${valueArray[0]}\",${valueArray[1]});" >> public/wp-config.php
+    printf "\r\n" >> public/wp-config.php
   else
-    printf "define(\"$value\",\$_SERVER[\"$value\"]);\n" >> public/wp-config.php
+    printf "define(\"$value\",\$_SERVER[\"$value\"]);" >> public/wp-config.php
+    printf "\r\n" >> public/wp-config.php
   fi
 done
 
