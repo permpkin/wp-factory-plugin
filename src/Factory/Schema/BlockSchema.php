@@ -90,9 +90,6 @@ class BlockSchema extends ConfigSchema {
       $parent->addHook('init', join('',$code));
 
       $source_folder = $_SERVER['APP_PATH'].'/src/blocks/'.$blockSchema['key'];
-
-      // add/update block.json
-      file_put_contents($source_folder."/block.json", json_encode($attr, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
       
       // create template files if they don't exist.
       if (
@@ -153,6 +150,9 @@ class BlockSchema extends ConfigSchema {
         ]));
 
       }
+
+      // add/update block.json
+      file_put_contents($source_folder."/block.json", json_encode($attr, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT));
 
     };
   }
