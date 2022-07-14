@@ -113,3 +113,13 @@ mkdir -p "$HOME/.config/valet/drivers/"
 curl -o "$HOME/.config/valet/drivers/WordpressFactoryValetDriver.php" "https://gist.githubusercontent.com/permpkin/f1c0434796c3c9230f39a1704637a3f4/raw/d09524bc99067b50644abcd4311c0a9d4b169123/WordpressFactoryValetDriver.php" 2>/dev/null
 echo "${GREEN}Saved Factory Valet Driver$NC"
 fi;
+
+#
+# Save SQLite Driver.
+#
+if [ ! -f "public/wp-content/db.php" ]; then
+echo "${BLUE}Saving SQLite Driver$NC"
+mkdir -p public/wp-content/mu-plugins
+curl -o public/wp-content/db.php https://gist.githubusercontent.com/permpkin/5082b2de0fcd6b8af476a5215460bf49/raw/3a1721786ed2d190e573e4edc4f4eb5d794f718c/db.php 2>/dev/null
+echo "${GREEN}Saved SQLite Driver$NC"
+fi;
