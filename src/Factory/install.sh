@@ -119,7 +119,6 @@ fi;
 #
 if [ ! -f "public/wp-content/db.php" ]; then
 echo "${BLUE}Saving SQLite Driver$NC"
-mkdir -p public/wp-content/mu-plugins
 curl -o public/wp-content/db.php https://gist.githubusercontent.com/permpkin/5082b2de0fcd6b8af476a5215460bf49/raw/3a1721786ed2d190e573e4edc4f4eb5d794f718c/db.php 2>/dev/null
 echo "${GREEN}Saved SQLite Driver$NC"
 fi;
